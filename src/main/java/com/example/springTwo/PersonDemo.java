@@ -4,7 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+
+import java.util.Date;
 
 
 public class PersonDemo {

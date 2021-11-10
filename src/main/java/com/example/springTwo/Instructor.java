@@ -1,21 +1,29 @@
 package com.example.springTwo;
 
+
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name="person")
-public class Person {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+@Table(name = "instructor")
+public class Instructor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String email;
-    private int age;
 
+    //Define relation with Instructor Detail table.
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="instructor_id")
+    private InstructorDetail instructorDetail;
 
-    public Person() {    }
+    public Instructor() { }
+
+    public Instructor(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public int getId() {
         return id;
@@ -23,12 +31,6 @@ public class Person {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Person(String name, String email, int age) {
-        this.name = name;
-        this.email = email;
-        this.age = age;
     }
 
     public String getName() {
@@ -47,21 +49,21 @@ public class Person {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public InstructorDetail getInstructorDetail() {
+        return instructorDetail;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setInstructorDetail(InstructorDetail instructorDetail) {
+        this.instructorDetail = instructorDetail;
     }
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Instructor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
+                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }
