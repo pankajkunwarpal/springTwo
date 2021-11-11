@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class InstructorApp {
 
     //Associated files Instructor and InstructorDetails and Course.
@@ -26,7 +28,7 @@ public class InstructorApp {
 
             session.beginTransaction();
 
-            addCourseAndStudent(session);
+            addCourseToStudent(session);
 
             session.getTransaction().commit();
 
@@ -166,6 +168,31 @@ public class InstructorApp {
 
         session.save(tempS1);
         session.save(tempS2);
+    }
+
+    public static void addCourseToStudent(Session session) {
+        System.out.println("Adding courses to student....");
+        Student tempS = session.get(Student.class, 2);
+
+        Course c1 = new Course("How to be a villain");
+        Course c2 = new Course("How to defeat a hero");
+
+        c1.addStudent(tempS);
+        c2.addStudent(tempS);
+
+        session.save(c1);
+        session.save(c2);
+    }
+
+
+    public static void getCourseAndStudent(Session session) {
+        System.out.println("Getting Student And Courses....");
+
+        Student tempS = session.get(Student.class, 2);
+
+        System.out.println("Student: " + tempS);
+        System.out.println("Courses: " + tempS.getCourses());
+
     }
 
 
